@@ -15,7 +15,7 @@ class matrixCode extends boxModel
   
   float textSpacing;
   int randomIndex;
-  boolean resetArray = false;
+  boolean switchArray = false;
   
   
   
@@ -39,10 +39,16 @@ class matrixCode extends boxModel
   // methods
   void drawBox()
   {
-    rect( x, y, boxWidth, boxHeight );    
+    rect( x, y, boxWidth, boxHeight );
+    
+    for ( int i = 0; i < 100; i++ )
+    {
+      text( fallingChars[i], charX1[i], charY1[i] );
+      text( fallingChars[i], charX2[i], charY2[i] );
+    }
   }
   
-  void resetPositionArray1()
+  void resetArray1()
   {
     for ( int i = 0; i < 10; i++ )
     {
@@ -57,11 +63,14 @@ class matrixCode extends boxModel
     // reseting textSpacing
     textSpacing =  boxWidth / 40;
     
+    // reseting index
+    index = 0;
+    
     for ( int i = 0; i < 10; i++ )
     {
       for ( int j = 0; j < 10; j++ )
       {
-        charY1[index] += textSpacing;
+        charY1[index] -= textSpacing;
         index++;
         textSpacing += boxWidth / 20;
       }
@@ -69,9 +78,12 @@ class matrixCode extends boxModel
     
     // reseting textSpacing
     textSpacing =  boxWidth / 40;
+    
+    // reseting index
+    index = 0;
   }
   
-  void resetPositionArray2()
+  void resetArray2()
   {
     for ( int i = 0; i < 10; i++ )
     {
@@ -86,11 +98,14 @@ class matrixCode extends boxModel
     // reseting textSpacing
     textSpacing =  boxWidth / 40;
     
+    // reseting index
+    index = 0;
+    
     for ( int i = 0; i < 10; i++ )
     {
       for ( int j = 0; j < 10; j++ )
       {
-        charY2[index] += textSpacing;
+        charY2[index] -= textSpacing;
         index++;
         textSpacing += boxWidth / 20;
       }
@@ -98,15 +113,19 @@ class matrixCode extends boxModel
     
     // reseting textSpacing
     textSpacing =  boxWidth / 40;
+    
+    // reseting index
+    index = 0;
   }
   
   void update()
   {
-    if ( !resetArray )
+    if ( !switchArray )
     {
       for ( int i = 0; i < 100; i++ )
       {
-        charY1[i] += textSpacing += boxWidth / 20;
+        charY1[i] += textSpacing;
+        textSpacing += 1;
       }
       
       // reseting textSpacing
@@ -116,16 +135,24 @@ class matrixCode extends boxModel
     {
       for ( int i = 0; i < 100; i++ )
       {
-        charY2[i] += textSpacing += boxWidth / 20;
+        charY2[i] += textSpacing;
+        textSpacing += 1;
       }
       
       // reseting textSpacing
       textSpacing =  boxWidth / 40;
     }
     
-    if ( charY1 >= height )
+    if ( charY1[0] >= height )
     {
-       
+      switchArray = true;
+      resetArray2();
+    }
+    
+    if ( charY2[0] > height )
+    {
+      switchArray = false;
+      resetArray1();
     }
   }
 }

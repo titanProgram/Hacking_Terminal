@@ -10,14 +10,15 @@ matrixCode matrixBox;
 
 void setup()
 {
-  size( 500, 500 );
+  size( 1500, 500 );
   matrixBox = new matrixCode( 0, 0, 200, 200, color( 0, 255, 0 ) );
+  matrixBox.resetArray1();
 }
 
 void draw()
 {
   background(0);
-  textSize(100);
+  textSize(22);
   noFill();
   matrixBox.drawBox();
   fill( 0,  255, 0 );
