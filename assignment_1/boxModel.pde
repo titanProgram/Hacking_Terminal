@@ -5,7 +5,7 @@ class boxModel
   float y;
   float boxWidth;
   float boxHeight;
-  
+
   // constructor
   boxModel( float x, float y, float boxWidth, float boxHeight )
   {

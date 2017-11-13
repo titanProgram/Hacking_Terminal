@@ -10,19 +10,22 @@ matrixCode matrixBox;
 
 void setup()
 {
-  size( 1500, 500 );
+  size( 500, 500 );
   matrixBox = new matrixCode( 0, 0, 200, 200, color( 0, 255, 0 ) );
-  matrixBox.resetArray1();
+  matrixBox.fallingCode();
 }
 
 void draw()
 {
-  background(0);
+  textSize(10);
+  fill(255);
+  text( "H", 50, 50);
+  //background(0);
   textSize(22);
   noFill();
-  matrixBox.drawBox();
+  //matrixBox.drawBox( 0 );
   fill( 0,  255, 0 );
-  matrixBox.update();
+  
   
   
   if ( frameCount % 60 == 0 )
