@@ -43,10 +43,14 @@ class buttonModel
   
   boolean buttonPressed()
   {
-    if( mousePressed && mouseX > xTopLeft && mouseX < xTopLeft + buttonW && mouseY > yTopLeft && mouseY < yTopLeft + .buttonH )
+    if( mousePressed && mouseX > xTopLeft && mouseX < xTopLeft + buttonW && mouseY > yTopLeft && mouseY < yTopLeft + buttonH )
     {
-      loggedIn = 1; 
+      return true; 
     } 
+    else
+    {
+      return false; 
+    }
   }
   
   

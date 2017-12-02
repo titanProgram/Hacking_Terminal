@@ -98,6 +98,8 @@ void draw()
       logged_in();
       break;
   }
+  checkButtons();
+  
   
 }
 
@@ -107,10 +109,7 @@ void logged_out()
 {
   background( 0, 0, 255 );
   loginButton.drawButton();
-  if( mousePressed && mouseX > loginButton.xTopLeft && mouseX < loginButton.xTopLeft + loginButton.buttonW && mouseY > loginButton.yTopLeft && mouseY < loginButton.yTopLeft + loginButton.buttonH )
-  {
-    loggedIn = 1; 
-  }
+
 }
 
 void logged_in()
@@ -140,5 +139,17 @@ void logged_in()
   strokeWeight( 1 );
   
   rectMode( CORNER ); 
+}
+
+void checkButtons()
+{
+  if ( loginButton.buttonPressed() )
+  {
+    loggedIn = 1;
+  }
   
+  if ( logout.buttonPressed() )
+  {
+    loggedIn = 0; 
+  }
 }
