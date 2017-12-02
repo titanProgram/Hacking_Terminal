@@ -41,6 +41,14 @@ class buttonModel
     text(text, x, y);
   }
   
+  boolean buttonPressed()
+  {
+    if( mousePressed && mouseX > xTopLeft && mouseX < xTopLeft + buttonW && mouseY > yTopLeft && mouseY < yTopLeft + .buttonH )
+    {
+      loggedIn = 1; 
+    } 
+  }
+  
   
 }
 
