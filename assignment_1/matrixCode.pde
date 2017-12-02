@@ -3,15 +3,15 @@ class matrixCode extends boxModel
   // data
   color codeColor;
   
-  // data for fallingCode
-  int ROW;
-  // COL will be the randomized number of columns
-  int COL;
-  char[][] charList;
-  float[][] charX;
-  float[][] charY;
+  int num_col;
+  int yPosSize;
+  float[] xPos;
+  float[] yPos;
+  char[][] charArray;
   
-  float textSize = 10;
+  int ROW;
+  int COL;
+  int i = 0;
   
   // contructor
   matrixCode( float x, float y, float boxWidth, float boxHeight, color codeColor )
@@ -28,36 +28,36 @@ class matrixCode extends boxModel
     rect( x, y, boxWidth, boxHeight );
   }
   
+  void resetArrays()
+  {
+    num_col = floor( random( boxWidth ) );
+    yPosSize = floor( boxHeight * 2 );
+    ROW = num_col;
+    COL = yPosSize;
+    
+    xPos = new float[num_col];
+    yPos = new float[yPosSize];
+    charArray = new char[ROW][COL];  
+    
+    for ( int i = 0; i < ROW; i++ )
+    {
+      for ( int j = 0; j < COL; j++ )
+      {
+        charArray[i][j] = 'a';
+        println(charArray[i][j]);
+        
+        //println(charArray[i][j]);
+      }
+    }
+    println(ROW);
+        println(COL);
+    
+    
+  }
+  
   void fallingCode()
   {
-    COL = floor( random( 5, floor( height / 4 ) ) );
-    ROW = floor( ( height * 2 ) / textSize );
-    
-    // creating array to store the falling characters in
-    charList = new char[ROW][COL];
-    charX = new float[ROW][COL];
-    charY = new float[ROW][COL];
-    // inserting random characters into the 2d array
-    for ( int i = 0; i < ROW; i++ )
-    {
-      for ( int j = 0; j < COL; j++ )
-      {
-        // assigning the element [i][j] a random character
-        charList[i][j] = char( floor( random( 255 ) ) );
-      }
-    }
-    
-    // inserting random characters into the 2d array
-    for ( int i = 0; i < ROW; i++ )
-    {
-      for ( int j = 0; j < COL; j++ )
-      {
-        // assigning the element [i][j] a random character
-        charList[i][j] = char( floor( random( 255 ) ) );
-      }
-    }
-    
-    
+        
   }
   
   void update()
@@ -65,3 +65,16 @@ class matrixCode extends boxModel
     
   }
 }
+
+/*
+  array of random chars
+  xpos array [random ( 5, width / textSize )] = random( width / textSize ) * textSize
+  ypos array [random ( 5, width / textSize )] = random( yStartingPoint, hieghh / 2 )
+  
+  run falling code method
+    everytime it runs i++
+      until ( any of the elements in ypos ) > height
+      
+  
+  
+*/
