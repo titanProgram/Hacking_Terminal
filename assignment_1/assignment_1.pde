@@ -87,11 +87,11 @@ void setup()
   // initiliazing objects
   loginButton = new buttonModel( width / 2, height * 0.7, buttonW, buttonH, color( 0, 0, 0 ), color( 0, 255, 0 ), "login" );
   // control panel
-  hackComputer = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin + ( buttonH / 2 ), controlPanelW - margin * 2, buttonH * 1.5, color( 0 ), color( 51, 122, 46 ), "HACK" );
-  logout = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), controlPanelW - margin * 2, buttonH * 1.5, color( 0 ), color( 51, 122, 46 ), "LOGOUT" );
+  hackComputer = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin + ( buttonH / 2 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "HACK" );
+  logout = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "LOGOUT" );
   // status panel
-  cpuPower = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin + ( buttonH / 2 ), statusPanelW - margin * 2, buttonH * 1.5, color( 0 ), color( 51, 122, 46 ), "" );
-  hackingBar = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), statusPanelW - margin * 2, buttonH * 1.5, color( 0 ), color( 51, 122, 46 ), "" );
+  cpuPower = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin + ( buttonH / 2 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
+  hackingBar = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
   
   
   // Getting data from csv file
@@ -128,25 +128,26 @@ void logged_out()
 void logged_in()
 {
   // monitor
-  background( 0 );
-  fill( 80 );
+  background( 80 );
+  fill( 0 );
   noStroke();
   rect( monitorX, monitorY, monitorW, monitorH, 7 );
   
   // status panel
   rectMode( CORNER ); 
+  fill( 0 );
   rect( statusPanelX, statusPanelY, statusPanelW, statusPanelH, 7 );
-  strokeWeight( 5 );
+  strokeWeight( 3 );
   cpuPower.drawButton();
   hackingBar.drawButton();
   strokeWeight( 1 );
   
   // control panel
   rectMode( CORNER );
-  fill( 80 );
+  fill( 0 );
   noStroke();
   rect( controlPanelX, controlPanelY, controlPanelW, controlPanelH, 7 );
-  strokeWeight( 5 );
+  strokeWeight( 3 );
   hackComputer.drawButton();
   logout.drawButton();
   strokeWeight( 1 );
@@ -164,25 +165,26 @@ void hack( int randNum )
   // local variables
   String emailMsg;
   char[] charArray1 = new char[2000];
-  char[] charArray2 = new char[50];
-  float num = 7;
+  char[] charArray2 = new char[100];
+  float num = 9;
   
   row = table.getRow(randNum);
   
+  fill( 0, 255, 0 );
   textSize( monitorTextSize );
   textAlign( LEFT, TOP );
   text( "Name: " + row.getString("name"), monitorX + monitorTextSize, monitorY + monitorTextSize);
-  text( row.getString("age"), monitorX + monitorTextSize, monitorY + monitorTextSize * 2);
-  text( row.getString("location"), monitorX + monitorTextSize, monitorY + monitorTextSize * 3);
-  text( row.getString("bankAccountNo"), monitorX + monitorTextSize, monitorY + monitorTextSize * 4);
-  text( row.getString("amount"), monitorX + monitorTextSize, monitorY + monitorTextSize * 5);
-  text( row.getString("emailTo"), monitorX + monitorTextSize, monitorY + monitorTextSize * 6);
+  text( "Age: " + row.getString("age"), monitorX + monitorTextSize, monitorY + monitorTextSize * 2);
+  text( "Location: " + row.getString("location"), monitorX + monitorTextSize, monitorY + monitorTextSize * 3);
+  text( "Bank Account Number: " + row.getString("bankAccountNo"), monitorX + monitorTextSize, monitorY + monitorTextSize * 4);
+  text( "Amount: " + row.getString("amount"), monitorX + monitorTextSize, monitorY + monitorTextSize * 5);
+  text( "Email to: " + row.getString("emailTo"), monitorX + monitorTextSize, monitorY + monitorTextSize * 7);
   
   emailMsg = row.getString("emailMessage");
   charArray1 = emailMsg.toCharArray();
-  for ( int i = 0; i < charArray1.length; i += 50 )
+  for ( int i = 0; i < charArray1.length; i += 100 )
   {
-    for ( int j = 0; j < 50 && i + j < charArray1.length; j++ )
+    for ( int j = 0; j < 100 && i + j < charArray1.length; j++ )
     {
       charArray2[j] = charArray1[i + j];
       println(i + j);
