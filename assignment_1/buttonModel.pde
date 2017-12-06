@@ -1,8 +1,6 @@
-class buttonModel
+class buttonModel extends boxModel
 {
   // data
-  float x;
-  float y;
   float buttonW;
   float buttonH;
   color fillC;
@@ -16,8 +14,7 @@ class buttonModel
   // constructor
   buttonModel( float x, float y, float buttonW, float buttonH, color fillC, color strokeC, String text )
   {
-    this.x = x;
-    this.y = y;
+    super( x, y );
     this.buttonW = buttonW;
     this.buttonH = buttonH;
     this.fillC = fillC;
@@ -43,17 +40,17 @@ class buttonModel
   
   boolean buttonPressed()
   {
-    if( mousePressed && mouseX > xTopLeft && mouseX < xTopLeft + buttonW && mouseY > yTopLeft && mouseY < yTopLeft + buttonH )
-    {
-      return true; 
-    } 
-    else
-    {
-      return false; 
-    }
+    
+    
+      if( mouseX > xTopLeft && mouseX < xTopLeft + buttonW && mouseY > yTopLeft && mouseY < yTopLeft + buttonH )
+      {
+        return true; 
+      } 
+      else
+      {
+        return false; 
+      }
   }
-  
-  
 }
 
 /*

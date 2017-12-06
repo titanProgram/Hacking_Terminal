@@ -1,4 +1,4 @@
-class matrixCode extends boxModel
+/*class matrixCode extends boxModel
 {
   // data
   color codeColor;
