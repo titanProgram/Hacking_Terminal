@@ -6,7 +6,7 @@
     ...
 */
 
-ArrayList<userInfo> users = new ArrayList<userInfo>();
+
 
 Table table;
 TableRow row;
@@ -53,6 +53,12 @@ float controlPanelH;
 
 int randNum;
 boolean hacked = false;
+
+
+monitor monitorScreen;
+
+
+
 void setup()
 {
   fullScreen();
@@ -90,17 +96,12 @@ void setup()
   hackComputer = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin + ( buttonH / 2 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "HACK" );
   logout = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "LOGOUT" );
   // status panel
-  cpuPower = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin + ( buttonH / 2 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
-  hackingBar = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
+  //cpuPower = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin + ( buttonH / 2 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
+  //hackingBar = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
+  monitorScreen = new monitor( monitorX, monitorY, monitorW, monitorH );
   
-  
-  // Getting data from csv file
   table = loadTable( "hacked_data.csv", "header" );
-  
-  for ( TableRow row : table.rows() )
-  {
-    users.add( new userInfo( row.getString("name"), row.getInt("age"), row.getString("location"), row.getString("bankAccountNo"), row.getFloat("amount"), row.getString("emailTo"), row.getString("emailMessage") ) );
-  }
+
 }
 
 void draw()
@@ -122,6 +123,7 @@ void logged_out()
 {
   background( 0, 0, 255 );
   loginButton.drawButton();
+  
 
 }
 
@@ -129,17 +131,21 @@ void logged_in()
 {
   // monitor
   background( 80 );
+  /*
   fill( 0 );
   noStroke();
-  rect( monitorX, monitorY, monitorW, monitorH, 7 );
+  rect( monitorX, monitorY, monitorW, monitorH, 7 );*/
+  
+  monitorScreen.drawMonitor();
+  noStroke();
   
   // status panel
   rectMode( CORNER ); 
   fill( 0 );
   rect( statusPanelX, statusPanelY, statusPanelW, statusPanelH, 7 );
   strokeWeight( 3 );
-  cpuPower.drawButton();
-  hackingBar.drawButton();
+  //cpuPower.drawButton();
+  //hackingBar.drawButton();
   strokeWeight( 1 );
   
   // control panel
@@ -158,6 +164,8 @@ void logged_in()
   {
     hack( randNum );
   }
+  
+  
 }
 
 void hack( int randNum )
