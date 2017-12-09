@@ -15,12 +15,13 @@ class monitor extends boxModel
     screen = createShape();
     screen.beginShape();
     screen.fill( 0 );
-    screen.stroke( 0, 0, 255 );
+    screen.stroke( 66, 104, 244 );
     screen.strokeWeight( 5 );
     screen.vertex( x, y );
     screen.vertex( x, y + monitorH );
     screen.vertex( x + ( monitorW * 0.9 ), y + monitorH );
     screen.vertex( x + monitorW, y + ( monitorH * 0.9 ) );
+    //screen.vertex( x + monitorW, ( y + monitorH ) - ( monitorW * 0.1 ) );
     screen.vertex( x + monitorW, y, x + monitorW );
     screen.vertex( x + monitorW, y + ( monitorH * 0.9 ) );
     screen.vertex( x + monitorW, y );
@@ -30,6 +31,7 @@ class monitor extends boxModel
   // methods
   void drawMonitor()
   {
+    fill(0);
     shape( screen, 0, 0 );
   }
   

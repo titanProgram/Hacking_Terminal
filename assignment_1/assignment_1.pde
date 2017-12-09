@@ -57,11 +57,11 @@ boolean hacked = false;
 
 monitor monitorScreen;
 
-
+arcAnimation logo;
 
 void setup()
 {
-  fullScreen();
+  fullScreen( );
   
   // monitor
   marginX = 200;
@@ -101,6 +101,9 @@ void setup()
   monitorScreen = new monitor( monitorX, monitorY, monitorW, monitorH );
   
   table = loadTable( "hacked_data.csv", "header" );
+  
+  logo = new arcAnimation( ( monitorW + monitorX ) - monitorW * 0.1, ( monitorH + monitorY ) - monitorH * 0.2, 80 );
+
 
 }
 
@@ -114,7 +117,10 @@ void draw()
     case 1:
       logged_in();
       break;
-  }  
+  } 
+  //logo.hourglass();
+  logo.drawArcs();
+  logo.rotateArcs();
 }
 
 
@@ -135,7 +141,6 @@ void logged_in()
   fill( 0 );
   noStroke();
   rect( monitorX, monitorY, monitorW, monitorH, 7 );*/
-  
   monitorScreen.drawMonitor();
   noStroke();
   
@@ -164,7 +169,6 @@ void logged_in()
   {
     hack( randNum );
   }
-  
   
 }
 
