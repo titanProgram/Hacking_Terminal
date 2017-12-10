@@ -44,7 +44,7 @@ class monitor extends boxModel
     text( "Hacking", x + textSize, y + monitorH - textSize * 2 );
     
     noStroke();
-    fill( 255 );
+    fill(  66, 104, 244  );
     
     rectMode( CENTER );
     

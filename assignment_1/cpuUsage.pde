@@ -22,19 +22,18 @@ class cpuUsage extends boxModel
   void drawBar()
   {
     noStroke();
-    if ( cpuPower > 74 )
+    if ( cpuPower > 15 )
     {
-      fill( 0, 255, 0 ); 
+      fill( 255, 0, 0 ); 
     }
-    else if ( cpuPower > 44 )
+    else if ( cpuPower > 9 )
     {
-      fill( 0, 255, 255 );
+      fill( 255, 255, 0 );
     }
     else
     {
-      fill( 255, 0, 0 );
+      fill( 0, 255, 0 );
     }
-    fill( 255 );
     textSize( textSize );
     
     textAlign( CORNER, CENTER );

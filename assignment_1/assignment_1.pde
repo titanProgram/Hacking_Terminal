@@ -61,6 +61,7 @@ float controlPanelW;
 float controlPanelH;
 
 int randNum;
+int hackedNum = 0;
 boolean hacked = false;
 boolean loadingBar = true;
 
@@ -144,6 +145,7 @@ void draw()
       break;
   } 
   logo.hourglass();
+  checkHover();
 }
 
 
@@ -186,6 +188,7 @@ void logged_in()
   rectMode( CORNER ); 
   textSize( cpuBar.textSize );
   text( "User: Anonymous", statusPanelX + ( statusPanelW * 0.05 ), statusPanelY + ( statusPanelH * 0.6 ) );
+  text( "Number of computers hacked: " + hackedNum, statusPanelX + ( statusPanelW * 0.35 ), statusPanelY + ( statusPanelH * 0.6 ) );
   
   if ( hacked )
   { 
@@ -193,6 +196,7 @@ void logged_in()
     {
       if ( monitorScreen.hackingBar() )
       {
+        hackedNum++;
         loadingBar = false;
       }
       cpuBar.increase();
@@ -258,6 +262,35 @@ void hack( int randNum )
   }
 }
 
+void checkHover()
+{
+  if ( loginButton.hover() )
+  {
+    loginButton.fillC = color( 51, 122, 46 );
+  }
+  else
+  {
+    loginButton.fillC = color( 0, 0, 0 );
+  }
+  
+  if ( logout.hover() )
+  {
+    logout.fillC = color( 51, 122, 46 );
+  }
+  else
+  {
+    logout.fillC = color( 0, 0, 0 );
+  }
+  
+  if ( hackComputer.hover() )
+  {
+    hackComputer.fillC = color( 51, 122, 46 );
+  }
+  else
+  {
+    hackComputer.fillC = color( 0, 0, 0 );
+  }
+}
 
 void checkButtons()
 {

@@ -40,15 +40,25 @@ class buttonModel extends boxModel
   
   boolean buttonPressed()
   {
-    
-    
-      if( mouseX > xTopLeft && mouseX < xTopLeft + buttonW && mouseY > yTopLeft && mouseY < yTopLeft + buttonH )
-      {
-        return true; 
-      } 
-      else
-      {
-        return false; 
-      }
+    if( mouseX > xTopLeft && mouseX < xTopLeft + buttonW && mouseY > yTopLeft && mouseY < yTopLeft + buttonH )
+    {
+      return true; 
+    } 
+    else
+    {
+      return false; 
+    }
+  }
+  
+  boolean hover()
+  {
+    if( mouseX > xTopLeft && mouseX < xTopLeft + buttonW && mouseY > yTopLeft && mouseY < yTopLeft + buttonH )
+    {
+      return true; 
+    } 
+    else
+    {
+      return false; 
+    }
   }
 }
