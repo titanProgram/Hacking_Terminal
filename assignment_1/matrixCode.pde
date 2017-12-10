@@ -37,7 +37,7 @@ class matrixCode
     rect( 0, 0, boxW, boxH );
     textSize( textSize );
     
-    fill( 0, 255, 0 );
+    fill( 66, 244, 72 );
     for ( int i = 1; i < yPosSize + 1; i++ )
     {
       text( char( floor( random( 34, 126 ) ) ), i * ( textSize * 2 ), yPos[i - 1] );

@@ -102,10 +102,10 @@ void setup()
   buttonMargin = ( controlPanelH - ( buttonH * 2 ) ) / 3;
   
   // initiliazing objects
-  loginButton = new buttonModel( width / 2, height * 0.7, buttonW, buttonH, color( 0, 0, 0 ), color( 0, 255, 0 ), "login" );
+  loginButton = new buttonModel( width / 2, height * 0.7, buttonW, buttonH, color( 0, 0, 0 ), color( 66, 244, 72 ), "login" );
   // control panel
-  hackComputer = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin + ( buttonH / 2 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "HACK" );
-  logout = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "LOGOUT" );
+  hackComputer = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin + ( buttonH / 2 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color(  66, 244, 72  ), "HACK" );
+  logout = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color(  66, 244, 72  ), "LOGOUT" );
   // status panel
   //cpuPower = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin + ( buttonH / 2 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
   //hackingBar = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
@@ -180,13 +180,14 @@ void logged_in()
   
   // status panel
   statusPanel.drawPanel();
-  fill( 255 );
+  
   textSize( cpuBar.textSize );
   
   cpuBar.drawBar();
   cpuBar.decrease();
   rectMode( CORNER ); 
   textSize( cpuBar.textSize );
+  fill( 66, 244, 72 );
   text( "User: Anonymous", statusPanelX + ( statusPanelW * 0.05 ), statusPanelY + ( statusPanelH * 0.6 ) );
   text( "Number of computers hacked: " + hackedNum, statusPanelX + ( statusPanelW * 0.35 ), statusPanelY + ( statusPanelH * 0.6 ) );
   
@@ -228,7 +229,7 @@ void hack( int randNum )
   {
     state = 3;
   }
-  fill( 0, 255, 0 );
+  fill( 66, 244, 72 );
   textSize( monitorTextSize );
   textAlign( LEFT, TOP );
   text( "Name: " + row.getString("name"), monitorX + monitorTextSize, monitorY + monitorTextSize);

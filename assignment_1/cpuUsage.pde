@@ -32,7 +32,7 @@ class cpuUsage extends boxModel
     }
     else
     {
-      fill( 0, 255, 0 );
+      fill( 66, 244, 72 );
     }
     textSize( textSize );
     

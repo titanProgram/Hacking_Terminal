@@ -41,11 +41,11 @@ class monitor extends boxModel
   {    
     textSize( textSize );
     textAlign( LEFT, CENTER );
+    fill( 66, 244, 72 );
     text( "Hacking", x + textSize, y + monitorH - textSize * 2 );
     
     noStroke();
-    fill(  66, 104, 244  );
-    
+    fill( 66, 244, 72 );
     rectMode( CENTER );
     
     for ( int j = 0; j < i; j++ )
@@ -60,7 +60,7 @@ class monitor extends boxModel
         i++;
       }
     }
-    
+    fill( 66, 244, 72 );
     text( round( 100 * ( (float) i / 40 ) ) + "%", x + ( ( textSize ) * 40 ) + ( textSize * 6 ), y + monitorH - textSize * 2 );
     
     if ( i == 40 )
