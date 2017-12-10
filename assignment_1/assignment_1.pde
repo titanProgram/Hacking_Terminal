@@ -6,7 +6,7 @@
     ...
 */
 
-
+import processing.sound.*;
 
 Table table;
 TableRow row;
@@ -26,8 +26,8 @@ cpuUsage cpuBar;
 
 systemErrors error;
 
-// 0 = false amd 1 = true
-int state = 0;
+
+int state = 3;
 
 // x and y margins
 float marginX;
@@ -64,11 +64,21 @@ int randNum;
 int hackedNum = 0;
 boolean hacked = false;
 boolean loadingBar = true;
+boolean playSound = true;
+boolean playHover = true;
+boolean playStatic = false;
 
 
 monitor monitorScreen;
 
 arcAnimation logo;
+
+// sound files
+SoundFile click1;
+SoundFile loading;
+SoundFile hover;
+SoundFile alarm1;
+SoundFile staticSound;
 
 void setup()
 {
@@ -125,6 +135,12 @@ void setup()
   
   error = new systemErrors( 0, 0 );
   
+  // initiliazing sound files
+  click1 = new SoundFile( this, "click1.wav" );
+  loading = new SoundFile( this, "loadingBar.wav" );
+  hover = new SoundFile( this, "hover.wav" );
+  alarm1 = new SoundFile( this, "alarm1.wav" );
+  staticSound = new SoundFile( this, "static.mp3" );
 }
 
 void draw()
@@ -142,6 +158,24 @@ void draw()
       break;
     case 3:
       error.corruption();
+      
+      if ( !playStatic )
+      {
+        if ( frameCount % 35 == 0 )
+        {
+          alarm1.loop();
+        }
+      }
+      
+      if ( playStatic )
+      {
+        staticSound.play();
+      }
+      
+      if ( frameCount % 240 == 0 )
+      {
+        playStatic = true;
+      }
       break;
   } 
   logo.hourglass();
@@ -195,16 +229,24 @@ void logged_in()
   { 
     if ( loadingBar )
     {
+      if ( playSound )
+      {
+        loading.play();
+        playSound = false;
+      }
       if ( monitorScreen.hackingBar() )
       {
         hackedNum++;
         loadingBar = false;
+        playSound = true;
+        loading.stop();
       }
       cpuBar.increase();
       if ( cpuBar.overload() )
       {
         state = 2;  
       }
+      
     } 
     else
     {
@@ -298,12 +340,14 @@ void checkButtons()
   if ( loginButton.buttonPressed() )
   {
     state = 1;
+    click1.play();
   }
   
   if ( logout.buttonPressed() )
   {
     state = 0;
     background( 0 );
+    click1.play();
   }
   
   if ( hackComputer.buttonPressed() )
@@ -312,6 +356,7 @@ void checkButtons()
     hacked = true;
     loadingBar = true;
     monitorScreen.i = 1;
+    click1.play();
   }
 }
 
