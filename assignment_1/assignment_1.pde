@@ -27,7 +27,7 @@ cpuUsage cpuBar;
 systemErrors error;
 
 // 0 = false amd 1 = true
-int loggedIn = 0;
+int state = 0;
 
 // x and y margins
 float marginX;
@@ -128,7 +128,7 @@ void setup()
 
 void draw()
 {
-  switch( loggedIn )
+  switch( state )
   {
     case 0:
       logged_out();
@@ -136,9 +136,11 @@ void draw()
     case 1:
       logged_in();
       break;
+    case 2:
+      error.blueScreenOfDeath();
+      break;
   } 
   logo.hourglass();
-  error.blueScreenOfDeath();
 }
 
 
@@ -190,6 +192,10 @@ void logged_in()
         
       }
       cpuBar.increase();
+      if ( cpuBar.overload() )
+      {
+        state = 2;  
+      }
     } 
     else
     {
@@ -249,12 +255,12 @@ void checkButtons()
 {
   if ( loginButton.buttonPressed() )
   {
-    loggedIn = 1;
+    state = 1;
   }
   
   if ( logout.buttonPressed() )
   {
-    loggedIn = 0;
+    state = 0;
     background( 0 );
   }
   

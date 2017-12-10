@@ -26,7 +26,8 @@ class cpuUsage extends boxModel
     textSize( textSize );
     
     text( "CPU USAGE", x, y );
-   
+    text( round( 100 * ( (float) cpuPower / 20 ) ) + "%", x + ( textSize * 3 ) + ( barW * 21 ), y );
+
     for ( int i = 1; i < cpuPower; i++ )
     {
       rect( x + ( textSize * 3 ) + ( barW * i ), y, barW * 0.9, barH ); 
