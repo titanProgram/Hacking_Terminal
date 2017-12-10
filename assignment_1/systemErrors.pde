@@ -32,5 +32,14 @@ class systemErrors extends boxModel
   
   void corruption()
   {
+    if ( frameCount % 0.5 == 0 )
+    {
+      for ( int i = 0; i < width; i++ )
+      {
+        noStroke();
+        fill( random( 0, 255 ), random( 0, 255 ), random( 0, 255 ) );
+        rect( random( 0, width ), random( 0, height ), 2, 2 );
+      }
+    }
   }
 }

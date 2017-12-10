@@ -27,11 +27,11 @@ class cpuUsage extends boxModel
     
     textAlign( CORNER, CENTER );
     text( "CPU USAGE", x, y );
-    text( round( 100 * ( (float) cpuPower / 20 ) ) + "%", x + ( textSize * 3 ) + ( barW * 21 ), y );
+    text( round( 100 * ( (float) cpuPower / 20 ) ) + "%", x + ( textSize * 4 ) + ( barW * 21 ), y );
 
     for ( int i = 1; i < cpuPower; i++ )
     {
-      rect( x + ( textSize * 3 ) + ( barW * i ), y, barW * 0.9, barH ); 
+      rect( x + ( textSize * 6 ) + ( barW * i ), y, barW * 0.9, barH ); 
     }
   }
   

@@ -27,7 +27,7 @@ cpuUsage cpuBar;
 systemErrors error;
 
 // 0 = false amd 1 = true
-int state = 0;
+int state = 3;
 
 // x and y margins
 float marginX;
@@ -120,7 +120,7 @@ void setup()
   statusPanel = new sidePanel( statusPanelX, statusPanelY, statusPanelW, controlPanelH );
   controlPanel = new sidePanel( controlPanelX, controlPanelY, controlPanelW, controlPanelH );
   
-  cpuBar = new cpuUsage( statusPanelX + ( statusPanelW * 0.1 ), statusPanelY + ( statusPanelH * 0.3 ), 20, 30 );
+  cpuBar = new cpuUsage( statusPanelX + ( statusPanelW * 0.05 ), statusPanelY + ( statusPanelH * 0.3 ), 20, 30 );
   
   error = new systemErrors( 0, 0 );
   
@@ -138,6 +138,9 @@ void draw()
       break;
     case 2:
       error.blueScreenOfDeath();
+      break;
+    case 3:
+      error.corruption();
       break;
   } 
   logo.hourglass();
@@ -180,19 +183,17 @@ void logged_in()
   
   cpuBar.drawBar();
   cpuBar.decrease();
-  println(statusP1 elY + ( statusPanelH * 0.8 ));
   rectMode( CORNER ); 
+  textSize( cpuBar.textSize );
+  text( "User: Anonymous", statusPanelX + ( statusPanelW * 0.05 ), statusPanelY + ( statusPanelH * 0.6 ) );
   
   if ( hacked )
-  {
-  
-    
-  if ( loadingBar )
+  { 
+    if ( loadingBar )
     {
       if ( monitorScreen.hackingBar() )
       {
         loadingBar = false;
-        
       }
       cpuBar.increase();
       if ( cpuBar.overload() )
@@ -219,6 +220,11 @@ void hack( int randNum )
   
   row = table.getRow(randNum);
   
+  if ( row.getString("name") == "Mr Robot" )
+  {
+    state = 3;
+    exit();
+  }
   fill( 0, 255, 0 );
   textSize( monitorTextSize );
   textAlign( LEFT, TOP );
