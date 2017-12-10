@@ -25,6 +25,7 @@ class cpuUsage extends boxModel
     fill( 255 );
     textSize( textSize );
     
+    textAlign( CORNER, CENTER );
     text( "CPU USAGE", x, y );
     text( round( 100 * ( (float) cpuPower / 20 ) ) + "%", x + ( textSize * 3 ) + ( barW * 21 ), y );
 

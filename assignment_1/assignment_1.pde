@@ -162,10 +162,7 @@ void logged_in()
   
   monitorScreen.drawMonitor();
   noStroke();
-  
-  // status panel
-  statusPanel.drawPanel();
-  
+   
   // control panel
   controlPanel.drawPanel();
   strokeWeight( 3 );
@@ -176,15 +173,21 @@ void logged_in()
   logo.drawArcs();
   logo.rotateArcs();
   
+  // status panel
+  statusPanel.drawPanel();
+  fill( 255 );
+  textSize( cpuBar.textSize );
+  
   cpuBar.drawBar();
   cpuBar.decrease();
-  
+  println(statusP1 elY + ( statusPanelH * 0.8 ));
   rectMode( CORNER ); 
   
   if ( hacked )
   {
   
-    if ( loadingBar )
+    
+  if ( loadingBar )
     {
       if ( monitorScreen.hackingBar() )
       {

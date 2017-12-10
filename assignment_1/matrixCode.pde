@@ -31,7 +31,7 @@ class matrixCode
   // methods
   void drawMatrixCode()
   {
-    fill( 0, 30 );
+    fill( 0, 20 );
     rectMode( CORNER );
     noStroke();
     rect( 0, 0, boxW, boxH );
@@ -40,7 +40,7 @@ class matrixCode
     fill( 0, 255, 0 );
     for ( int i = 1; i < yPosSize + 1; i++ )
     {
-      text( char( floor( random( 1, 100 ) ) ), i * ( textSize * 2 ), yPos[i - 1] );
+      text( char( floor( random( 34, 126 ) ) ), i * ( textSize * 2 ), yPos[i - 1] );
     }
     
     for ( int i = 0; i < yPosSize; i++ )
