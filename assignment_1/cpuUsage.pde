@@ -21,6 +21,8 @@ class cpuUsage extends boxModel
   // methods
   void drawBar()
   {
+    noStroke();
+    fill( 255 );
     textSize( textSize );
     
     text( "CPU USAGE", x, y );
@@ -41,7 +43,7 @@ class cpuUsage extends boxModel
   
   void decrease()
   {
-    if ( frameCount % 30 == 0 )
+    if ( frameCount % 180 == 0 && cpuPower > 5)
     {
       cpuPower -= 1;
     } 

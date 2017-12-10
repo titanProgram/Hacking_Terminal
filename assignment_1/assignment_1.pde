@@ -24,6 +24,8 @@ sidePanel controlPanel;
 
 cpuUsage cpuBar;
 
+systemErrors error;
+
 // 0 = false amd 1 = true
 int loggedIn = 0;
 
@@ -118,7 +120,9 @@ void setup()
   statusPanel = new sidePanel( statusPanelX, statusPanelY, statusPanelW, controlPanelH );
   controlPanel = new sidePanel( controlPanelX, controlPanelY, controlPanelW, controlPanelH );
   
-  cpuBar = new cpuUsage( 200, 200, 20, 30 );
+  cpuBar = new cpuUsage( statusPanelX + ( statusPanelW * 0.1 ), statusPanelY + ( statusPanelH * 0.3 ), 20, 30 );
+  
+  error = new systemErrors( 0, 0 );
   
 }
 
@@ -134,8 +138,7 @@ void draw()
       break;
   } 
   logo.hourglass();
-  
-  
+  error.blueScreenOfDeath();
 }
 
 
@@ -171,6 +174,9 @@ void logged_in()
   logo.drawArcs();
   logo.rotateArcs();
   
+  cpuBar.drawBar();
+  cpuBar.decrease();
+  
   rectMode( CORNER ); 
   
   if ( hacked )
@@ -181,11 +187,9 @@ void logged_in()
       if ( monitorScreen.hackingBar() )
       {
         loadingBar = false;
+        
       }
-      if ( frameCount % 30 == 0 )
-      {
-        cpuBar.drawBar();
-      }
+      cpuBar.increase();
     } 
     else
     {
