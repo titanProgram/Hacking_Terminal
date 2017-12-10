@@ -27,7 +27,7 @@ cpuUsage cpuBar;
 systemErrors error;
 
 // 0 = false amd 1 = true
-int state = 3;
+int state = 0;
 
 // x and y margins
 float marginX;
@@ -220,10 +220,9 @@ void hack( int randNum )
   
   row = table.getRow(randNum);
   
-  if ( row.getString("name") == "Mr Robot" )
+  if ( row.getString("name").equals( "Mr Robot" ) )
   {
     state = 3;
-    exit();
   }
   fill( 0, 255, 0 );
   textSize( monitorTextSize );
