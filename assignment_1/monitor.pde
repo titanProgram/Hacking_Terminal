@@ -28,7 +28,7 @@ class monitor extends boxModel
     screen.vertex( x + monitorW, y, x + monitorW );
     screen.vertex( x + monitorW, y + ( monitorH * 0.9 ) );
     screen.vertex( x + monitorW, y );
-    screen.endShape(CLOSE);
+    screen.endShape( CLOSE );
   }
   
   // methods

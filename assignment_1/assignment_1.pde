@@ -18,6 +18,9 @@ buttonModel hackComputer;
 buttonModel logout;
 
 matrixCode fallingCode;
+
+sidePanel panel;
+
 // 0 = false amd 1 = true
 int loggedIn = 0;
 
@@ -109,6 +112,7 @@ void setup()
   
   logo = new arcAnimation( ( monitorW + monitorX ) - monitorW * 0.1, ( monitorH + monitorY ) - monitorH * 0.2, 80 );
   
+  panel = new sidePanel( statusPanelX, controlPanelY, controlPanelW, controlPanelH );
   
 }
 
@@ -123,7 +127,7 @@ void draw()
       logged_in();
       break;
   } 
-  //logo.hourglass();
+  logo.hourglass();
   
 }
 
@@ -138,13 +142,14 @@ void logged_out()
   loginButton.drawButton();
 }
 
+
 void logged_in()
 {
   // monitor
   background( 80 );
   monitorScreen.drawMonitor();
   noStroke();
-  
+  /*-
   // status panel
   rectMode( CORNER ); 
   fill( 0 );
@@ -153,7 +158,9 @@ void logged_in()
   //cpuPower.drawButton();
   //hackingBar.drawButton();
   strokeWeight( 1 );
+  */
   
+  panel.drawPanel();
   // control panel
   rectMode( CORNER );
   fill( 0 );
@@ -184,11 +191,9 @@ void logged_in()
       hack( randNum );
       monitorScreen.hackingBar();
     }
-    
   }
-  
-  
 }
+
 
 void hack( int randNum )
 {
@@ -234,6 +239,7 @@ void hack( int randNum )
   }
 }
 
+
 void checkButtons()
 {
   if ( loginButton.buttonPressed() )
@@ -255,6 +261,7 @@ void checkButtons()
     monitorScreen.i = 1;
   }
 }
+
 
 void mouseReleased()
 {

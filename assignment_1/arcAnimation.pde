@@ -14,7 +14,6 @@ class arcAnimation
   
   boolean toggle = true;
   
-
   
   // constructor
   arcAnimation( float x, float y, float radius )
@@ -75,7 +74,9 @@ class arcAnimation
     pushMatrix();
     noStroke();
     //translate( x, y );
-    //shape( hourglass, x, y );
+    //rectMode( CENTER );
+    //rotate( radians( p ) );
+    //shape( hourglass, 0, 0 );
     //triangle( 100, 100, 150, 150, 50, 150 );
     //triangle(x, y, x + ( arcRadius * 0.25 ), y - ( arcRadius * 0.4 ), x - ( arcRadius * 0.25 ), y - ( arcRadius * 0.4 ) );
     //hourglass.rotate( radians( 0.2 ));
