@@ -17,6 +17,7 @@ buttonModel hackingBar;
 buttonModel hackComputer;
 buttonModel logout;
 
+matrixCode fallingCode;
 // 0 = false amd 1 = true
 int loggedIn = 0;
 
@@ -99,13 +100,16 @@ void setup()
   // status panel
   //cpuPower = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin + ( buttonH / 2 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
   //hackingBar = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
+  
   monitorScreen = new monitor( monitorX, monitorY, monitorW, monitorH );
+  
+  fallingCode = new matrixCode( width, height );
   
   table = loadTable( "hacked_data.csv", "header" );
   
   logo = new arcAnimation( ( monitorW + monitorX ) - monitorW * 0.1, ( monitorH + monitorY ) - monitorH * 0.2, 80 );
-
-
+  
+  
 }
 
 void draw()
@@ -127,9 +131,11 @@ void draw()
 // FUNCTIONS
 void logged_out()
 {
+  if ( frameCount % 4 == 0 )
+  {
+    fallingCode.drawMatrixCode();
+  }
   loginButton.drawButton();
-  
-
 }
 
 void logged_in()
@@ -237,7 +243,8 @@ void checkButtons()
   
   if ( logout.buttonPressed() )
   {
-    loggedIn = 0; 
+    loggedIn = 0;
+    background( 0 );
   }
   
   if ( hackComputer.buttonPressed() )

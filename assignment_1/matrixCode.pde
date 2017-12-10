@@ -1,23 +1,24 @@
-class matrixCode extends boxModel
+class matrixCode
 {
   // data
-  float x;
-  float y;
-  
+  float boxW;
+  float boxH;
   float[] yPos;
   int yPosSize;
   float minPoint = -300;
+  float count = minPoint;
   float maxPoint = 200;
   
   
   float textSize = 10;
   
   // constructor
-  matrixCode( float x, float y )
+  matrixCode( float boxW, float boxH )
   {
-    super( x, y );
-    this.x = x;
-    this.y = y;
+    this.boxW = boxW;
+    this.boxH = boxH;
+    
+    
     yPosSize = floor( width / textSize );
     yPos = new float[yPosSize];
     
@@ -30,21 +31,28 @@ class matrixCode extends boxModel
   // methods
   void drawMatrixCode()
   {
-    background( 0, 5 );
+    fill( 0, 30 );
+    rectMode( CORNER );
+    noStroke();
+    rect( 0, 0, boxW, boxH );
     
-    for ( int i = 1; i < yPosSize + 1; i++ )
+    fill( 0, 255, 0 );
+    for ( int i = 1; i < yPosSize / 2 + 1; i++ )
     {
-      text( char( floor( random( 1, 255 ) ) ), i * textSize, yPos[i - 1] );
+      text( char( floor( random( 1, 100 ) ) ), i * ( textSize * 2 ), yPos[i - 1] );
     }
     
     for ( int i = 0; i < yPosSize; i++ )
     {
-      yPos[i] += textSize;
+      yPos[i] += textSize * 2;
     }
     
-    if ( minPoint > height )
+    count += textSize;
+    
+    if ( count > maxPoint / 2 )
     {
       resetMatrixCode();
+      count = minPoint;
     }
   }
   

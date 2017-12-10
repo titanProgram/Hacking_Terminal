@@ -64,8 +64,6 @@ class monitor extends boxModel
     
     text( round( 100 * ( (float) i / 40 ) ) + "%", x + ( ( textSize ) * 40 ) + ( textSize * 6 ), y + monitorH - textSize * 2 );
     
-    
-    
     if ( i == 40 )
     {
       return true;
