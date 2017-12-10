@@ -5,6 +5,9 @@ class monitor extends boxModel
   float monitorH;
   PShape screen;
   
+  float textSize = width / 80;
+  int i = 1;
+  
   // constructor
   monitor( float x, float y, float monitorW, float monitorH )
   {
@@ -35,8 +38,41 @@ class monitor extends boxModel
     shape( screen, 0, 0 );
   }
   
-  void hackingBar()
-  {
+  boolean hackingBar()
+  {    
+    textSize( textSize );
+    textAlign( LEFT, CENTER );
+    text( "Hacking", x + textSize, y + monitorH - textSize * 2 );
     
+    noStroke();
+    fill( 255 );
+    
+    rectMode( CENTER );
+    
+    for ( int j = 0; j < i; j++ )
+    {
+      rect( x + ( ( textSize ) * j ) + ( textSize * 6 ), y + monitorH - textSize * 2, textSize * 0.7, textSize * 1.6 );
+    }
+    
+    if ( frameCount % 5 == 0 )
+    {
+      if ( i < 40 )
+      {
+        i++;
+      }
+    }
+    
+    text( round( 100 * ( (float) i / 40 ) ) + "%", x + ( ( textSize ) * 40 ) + ( textSize * 6 ), y + monitorH - textSize * 2 );
+    
+    
+    
+    if ( i == 40 )
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 }

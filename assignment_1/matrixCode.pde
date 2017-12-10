@@ -1,80 +1,59 @@
-/*class matrixCode extends boxModel
+class matrixCode extends boxModel
 {
   // data
-  color codeColor;
+  float x;
+  float y;
   
-  int num_col;
-  int yPosSize;
-  float[] xPos;
   float[] yPos;
-  char[][] charArray;
+  int yPosSize;
+  float minPoint = -300;
+  float maxPoint = 200;
   
-  int ROW;
-  int COL;
-  int i = 0;
   
-  // contructor
-  matrixCode( float x, float y, float boxWidth, float boxHeight, color codeColor )
+  float textSize = 10;
+  
+  // constructor
+  matrixCode( float x, float y )
   {
-    super( x, y, boxWidth, boxHeight );
-    this.codeColor = codeColor;
+    super( x, y );
+    this.x = x;
+    this.y = y;
+    yPosSize = floor( width / textSize );
+    yPos = new float[yPosSize];
     
+    for ( int i = 0; i < yPosSize; i++ )
+    {
+      yPos[i] = floor( random( minPoint, maxPoint ) );
+    }
   }
   
   // methods
-  void drawBox( color backgroudColor )
+  void drawMatrixCode()
   {
-    fill( backgroudColor );
-    rect( x, y, boxWidth, boxHeight );
-  }
-  
-  void resetArrays()
-  {
-    num_col = floor( random( boxWidth ) );
-    yPosSize = floor( boxHeight * 2 );
-    ROW = num_col;
-    COL = yPosSize;
+    background( 0, 5 );
     
-    xPos = new float[num_col];
-    yPos = new float[yPosSize];
-    charArray = new char[ROW][COL];  
-    
-    for ( int i = 0; i < ROW; i++ )
+    for ( int i = 1; i < yPosSize + 1; i++ )
     {
-      for ( int j = 0; j < COL; j++ )
-      {
-        charArray[i][j] = 'a';
-        println(charArray[i][j]);
-        
-        //println(charArray[i][j]);
-      }
+      text( char( floor( random( 1, 255 ) ) ), i * textSize, yPos[i - 1] );
     }
-    println(ROW);
-        println(COL);
     
+    for ( int i = 0; i < yPosSize; i++ )
+    {
+      yPos[i] += textSize;
+    }
     
+    if ( minPoint > height )
+    {
+      resetMatrixCode();
+    }
   }
   
-  void fallingCode()
+  void resetMatrixCode()
   {
-        
+    for ( int i = 0; i < yPosSize; i++ )
+    {
+      yPos[i] = floor( random( minPoint, maxPoint ) );
+    }
   }
   
-  void update()
-  {
-    
-  }
 }
-
-/*
-  array of random chars
-  xpos array [random ( 5, width / textSize )] = random( width / textSize ) * textSize
-  ypos array [random ( 5, width / textSize )] = random( yStartingPoint, hieghh / 2 )
-  
-  run falling code method
-    everytime it runs i++
-      until ( any of the elements in ypos ) > height
-      
-  
-  
-*/

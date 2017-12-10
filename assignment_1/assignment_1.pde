@@ -53,6 +53,7 @@ float controlPanelH;
 
 int randNum;
 boolean hacked = false;
+boolean loadingBar = true;
 
 
 monitor monitorScreen;
@@ -119,15 +120,13 @@ void draw()
       break;
   } 
   //logo.hourglass();
-  logo.drawArcs();
-  logo.rotateArcs();
+  
 }
 
 
 // FUNCTIONS
 void logged_out()
 {
-  background( 0, 0, 255 );
   loginButton.drawButton();
   
 
@@ -137,10 +136,6 @@ void logged_in()
 {
   // monitor
   background( 80 );
-  /*
-  fill( 0 );
-  noStroke();
-  rect( monitorX, monitorY, monitorW, monitorH, 7 );*/
   monitorScreen.drawMonitor();
   noStroke();
   
@@ -163,12 +158,29 @@ void logged_in()
   logout.drawButton();
   strokeWeight( 1 );
   
+  logo.drawArcs();
+  logo.rotateArcs();
+  
   rectMode( CORNER ); 
   
   if ( hacked )
   {
-    hack( randNum );
+  
+    if ( loadingBar )
+    {
+      if ( monitorScreen.hackingBar() )
+      {
+        loadingBar = false;
+      }
+    } 
+    else
+    {
+      hack( randNum );
+      monitorScreen.hackingBar();
+    }
+    
   }
+  
   
 }
 
@@ -232,6 +244,8 @@ void checkButtons()
   {
     randNum = floor( random( 0, table.getRowCount() ) );
     hacked = true;
+    loadingBar = true;
+    monitorScreen.i = 1;
   }
 }
 

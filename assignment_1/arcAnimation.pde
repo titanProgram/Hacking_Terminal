@@ -14,6 +14,8 @@ class arcAnimation
   
   boolean toggle = true;
   
+
+  
   // constructor
   arcAnimation( float x, float y, float radius )
   {
