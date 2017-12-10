@@ -19,7 +19,8 @@ buttonModel logout;
 
 matrixCode fallingCode;
 
-sidePanel panel;
+sidePanel statusPanel;
+sidePanel controlPanel;
 
 // 0 = false amd 1 = true
 int loggedIn = 0;
@@ -112,7 +113,8 @@ void setup()
   
   logo = new arcAnimation( ( monitorW + monitorX ) - monitorW * 0.1, ( monitorH + monitorY ) - monitorH * 0.2, 80 );
   
-  panel = new sidePanel( statusPanelX, controlPanelY, controlPanelW, controlPanelH );
+  statusPanel = new sidePanel( statusPanelX, statusPanelY, statusPanelW, controlPanelH );
+  controlPanel = new sidePanel( controlPanelX, controlPanelY, controlPanelW, controlPanelH );
   
 }
 
@@ -146,26 +148,16 @@ void logged_out()
 void logged_in()
 {
   // monitor
-  background( 80 );
+  background( 20 );
+  
   monitorScreen.drawMonitor();
   noStroke();
-  /*-
-  // status panel
-  rectMode( CORNER ); 
-  fill( 0 );
-  rect( statusPanelX, statusPanelY, statusPanelW, statusPanelH, 7 );
-  strokeWeight( 3 );
-  //cpuPower.drawButton();
-  //hackingBar.drawButton();
-  strokeWeight( 1 );
-  */
   
-  panel.drawPanel();
+  // status panel
+  statusPanel.drawPanel();
+  
   // control panel
-  rectMode( CORNER );
-  fill( 0 );
-  noStroke();
-  rect( controlPanelX, controlPanelY, controlPanelW, controlPanelH, 7 );
+  controlPanel.drawPanel();
   strokeWeight( 3 );
   hackComputer.drawButton();
   logout.drawButton();

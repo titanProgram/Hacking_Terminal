@@ -35,9 +35,10 @@ class matrixCode
     rectMode( CORNER );
     noStroke();
     rect( 0, 0, boxW, boxH );
+    textSize( textSize );
     
     fill( 0, 255, 0 );
-    for ( int i = 1; i < yPosSize / 2 + 1; i++ )
+    for ( int i = 1; i < yPosSize + 1; i++ )
     {
       text( char( floor( random( 1, 100 ) ) ), i * ( textSize * 2 ), yPos[i - 1] );
     }
@@ -49,7 +50,7 @@ class matrixCode
     
     count += textSize;
     
-    if ( count > maxPoint / 2 )
+    if ( count > maxPoint )
     {
       resetMatrixCode();
       count = minPoint;
