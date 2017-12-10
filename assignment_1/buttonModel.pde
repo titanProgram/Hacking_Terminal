@@ -52,10 +52,3 @@ class buttonModel extends boxModel
       }
   }
 }
-
-/*
-if( mousePressed 
-    && mouseX > ( loginButton.x - loginButton.buttonW / 2 ) && mouseX < ( loginButton.x - loginButton.buttonW / 2 ) + loginButton.buttonW 
-    && mouseY > ( loginButton.y - loginButton.buttonH / 2 ) && mouseY < ( loginButton.y - loginButton.buttonH / 2 ) + loginButton.buttonH )
-    {
-      */

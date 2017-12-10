@@ -24,7 +24,6 @@ class monitor extends boxModel
     screen.vertex( x, y + monitorH );
     screen.vertex( x + ( monitorW * 0.9 ), y + monitorH );
     screen.vertex( x + monitorW, y + ( monitorH * 0.9 ) );
-    //screen.vertex( x + monitorW, ( y + monitorH ) - ( monitorW * 0.1 ) );
     screen.vertex( x + monitorW, y, x + monitorW );
     screen.vertex( x + monitorW, y + ( monitorH * 0.9 ) );
     screen.vertex( x + monitorW, y );

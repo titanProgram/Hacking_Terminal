@@ -64,5 +64,4 @@ class matrixCode
       yPos[i] = floor( random( minPoint, maxPoint ) );
     }
   }
-  
 }

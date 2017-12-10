@@ -22,6 +22,8 @@ matrixCode fallingCode;
 sidePanel statusPanel;
 sidePanel controlPanel;
 
+cpuUsage cpuBar;
+
 // 0 = false amd 1 = true
 int loggedIn = 0;
 
@@ -116,6 +118,8 @@ void setup()
   statusPanel = new sidePanel( statusPanelX, statusPanelY, statusPanelW, controlPanelH );
   controlPanel = new sidePanel( controlPanelX, controlPanelY, controlPanelW, controlPanelH );
   
+  cpuBar = new cpuUsage( 200, 200, 20, 30 );
+  
 }
 
 void draw()
@@ -130,6 +134,7 @@ void draw()
       break;
   } 
   logo.hourglass();
+  
   
 }
 
@@ -176,6 +181,10 @@ void logged_in()
       if ( monitorScreen.hackingBar() )
       {
         loadingBar = false;
+      }
+      if ( frameCount % 30 == 0 )
+      {
+        cpuBar.drawBar();
       }
     } 
     else
