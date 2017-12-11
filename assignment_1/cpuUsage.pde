@@ -5,17 +5,20 @@ class cpuUsage extends boxModel
   float y;
   float barW;
   float barH;
+  float panelW;
   int cpuPower;
-  int textSize = 15;
+  int textSize;
   // constructor
-  cpuUsage( float x, float y, float barW, float barH )
+  cpuUsage( float x, float y, float barW, float barH, float panelW )
   {
     super( x, y );
     this.x =x;
     this.y = y;
     this.barW = barW;
     this.barH = barH;
+    this.panelW = panelW;
     this.cpuPower = 5;
+    textSize = floor( panelW / 40 );
   }
   
   // methods
@@ -38,7 +41,7 @@ class cpuUsage extends boxModel
     
     textAlign( CORNER, CENTER );
     text( "CPU USAGE", x, y );
-    text( round( 100 * ( (float) cpuPower / 20 ) ) + "%", x + ( textSize * 4 ) + ( barW * 21 ), y );
+    text( round( 100 * ( (float) cpuPower / 20 ) ) + "%", x + panelW * 0.8, y );
 
     for ( int i = 1; i < cpuPower; i++ )
     {

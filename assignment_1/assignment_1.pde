@@ -27,7 +27,7 @@ cpuUsage cpuBar;
 systemErrors error;
 
 
-int state = 3;
+int state = 0;
 
 // x and y margins
 float marginX;
@@ -131,7 +131,7 @@ void setup()
   statusPanel = new sidePanel( statusPanelX, statusPanelY, statusPanelW, controlPanelH );
   controlPanel = new sidePanel( controlPanelX, controlPanelY, controlPanelW, controlPanelH );
   
-  cpuBar = new cpuUsage( statusPanelX + ( statusPanelW * 0.05 ), statusPanelY + ( statusPanelH * 0.3 ), 20, 30 );
+  cpuBar = new cpuUsage( statusPanelX + ( statusPanelW * 0.05 ), statusPanelY + ( statusPanelH * 0.3 ), statusPanelW / 30, statusPanelH / 6, statusPanelW );
   
   error = new systemErrors( 0, 0 );
   
