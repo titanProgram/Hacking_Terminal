@@ -31,7 +31,7 @@ class matrixCode
   // methods
   void drawMatrixCode()
   {
-    fill( 0, 20 );
+    fill( 0, 40 );
     rectMode( CORNER );
     noStroke();
     rect( 0, 0, boxW, boxH );

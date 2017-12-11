@@ -12,8 +12,7 @@ Table table;
 TableRow row;
 
 buttonModel loginButton;
-buttonModel cpuPower;
-buttonModel hackingBar;
+buttonModel shutdown;
 buttonModel hackComputer;
 buttonModel logout;
 
@@ -67,7 +66,8 @@ boolean loadingBar = true;
 boolean playSound = true;
 boolean playHover = true;
 boolean playStatic = false;
-
+boolean playAlarm2 = true;
+boolean changeBackground = true;
 
 monitor monitorScreen;
 
@@ -78,6 +78,7 @@ SoundFile click1;
 SoundFile loading;
 SoundFile hover;
 SoundFile alarm1;
+SoundFile alarm2;
 SoundFile staticSound;
 
 void setup()
@@ -113,12 +114,10 @@ void setup()
   
   // initiliazing objects
   loginButton = new buttonModel( width / 2, height * 0.7, buttonW, buttonH, color( 0, 0, 0 ), color( 66, 244, 72 ), "login" );
+  shutdown = new buttonModel( width / 2, height * 0.71 + buttonH, buttonW, buttonH, color( 0, 0, 0 ), color( 255, 0, 0 ), "Terminate" );
   // control panel
   hackComputer = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin + ( buttonH / 2 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color(  66, 244, 72  ), "HACK" );
   logout = new buttonModel(controlPanelX + controlPanelW / 2, controlPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), controlPanelW - margin * 2, buttonH * 1.5, color( 80 ), color(  66, 244, 72  ), "LOGOUT" );
-  // status panel
-  //cpuPower = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin + ( buttonH / 2 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
-  //hackingBar = new buttonModel( statusPanelX + statusPanelW / 2, statusPanelY + buttonMargin * 2 + ( buttonH * 1.5 ), statusPanelW - margin * 2, buttonH * 1.5, color( 80 ), color( 51, 122, 46 ), "" );
   
   monitorScreen = new monitor( monitorX, monitorY, monitorW, monitorH );
   
@@ -140,6 +139,7 @@ void setup()
   loading = new SoundFile( this, "loadingBar.wav" );
   hover = new SoundFile( this, "hover.wav" );
   alarm1 = new SoundFile( this, "alarm1.wav" );
+  alarm2 = new SoundFile( this, "alarm2.mp3" );
   staticSound = new SoundFile( this, "static.mp3" );
 }
 
@@ -155,6 +155,17 @@ void draw()
       break;
     case 2:
       error.blueScreenOfDeath();
+      loading.stop();
+      if ( playAlarm2 )
+      {
+        alarm2.play();
+        playAlarm2 = false;
+      }
+      
+      if ( frameCount % 300 == 0 )
+      {
+        playAlarm2 = true;
+      }
       break;
     case 3:
       error.corruption();
@@ -191,14 +202,24 @@ void logged_out()
     fallingCode.drawMatrixCode();
   }
   loginButton.drawButton();
+  shutdown.drawButton();
+  changeBackground = true;
 }
 
 
 void logged_in()
 {
   // monitor
-  background( 20 );
-  
+  //background( 20 );
+  if ( changeBackground )
+  {
+    background( 0 );
+    changeBackground = false;
+  }
+  if ( frameCount % 4 == 0 )
+  {
+    fallingCode.drawMatrixCode();
+  }
   monitorScreen.drawMonitor();
   noStroke();
    
@@ -316,6 +337,15 @@ void checkHover()
     loginButton.fillC = color( 0, 0, 0 );
   }
   
+  if ( shutdown.hover() )
+  {
+    shutdown.fillC = color( 255, 0, 0 );
+  }
+  else
+  {
+    shutdown.fillC = color( 0, 0, 0 );
+  }
+  
   if ( logout.hover() )
   {
     logout.fillC = color( 51, 122, 46 );
@@ -341,6 +371,13 @@ void checkButtons()
   {
     state = 1;
     click1.play();
+  }
+  
+  if ( shutdown.buttonPressed() )
+  {
+    click1.play();
+    delay(1000);
+    exit();
   }
   
   if ( logout.buttonPressed() )
