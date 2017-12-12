@@ -285,13 +285,12 @@ void hack( int randNum )
   char[] charArray1 = new char[2000];
   char[] charArray2 = new char[100];
   float num = 9;
+  int lastLine;
+  int count;
   
   row = table.getRow(randNum);
   
-  if ( row.getString("name").equals( "Mr Robot" ) )
-  {
-    state = 3;
-  }
+  
   fill( 66, 244, 72 );
   textSize( monitorTextSize );
   textAlign( LEFT, TOP );
@@ -304,25 +303,45 @@ void hack( int randNum )
   
   emailMsg = row.getString("emailMessage");
   charArray1 = emailMsg.toCharArray();
+  lastLine = charArray1.length % 100;
+  count = ( charArray1.length - lastLine ) / 100;
+  char[] charArray3 = new char[lastLine];
+  
   for ( int i = 0; i < charArray1.length; i += 100 )
   {
     for ( int j = 0; j < 100 && i + j < charArray1.length; j++ )
     {
       charArray2[j] = charArray1[i + j];
-      println(i + j);
-       println(charArray1.length);
     }
     
-    
-    
-    emailMsg = new String(charArray2);
+    println("lastLine = " + lastLine);
+    println("charArray1 = " + charArray1.length);
+    println("count = " + count);
+    println("i = " + i);
+    if ( count == 0 )
+    {
+      for ( int k = 0; k < lastLine; k++ )
+      {
+        charArray3[k] = charArray2[k];
+      }
+      emailMsg = new String(charArray3);
+    }
+    else
+    {
+      emailMsg = new String(charArray2);
+    }
     text( emailMsg, monitorX + monitorTextSize, monitorY + monitorTextSize * num );
     num++;
+    count--;
+  }
+  
+  if ( row.getString("name").equals( "Mr Robot" ) )
+  {
     
-    for ( int j = 0; j < 50; j++ )
-    {
-      charArray2[j] = ' ';
-    }
+    textAlign( CENTER, CENTER );
+    textSize( width / 30 );
+    text( "HELLO FRIEND", width / 2, height / 2 );
+    state = 3;
   }
 }
 
