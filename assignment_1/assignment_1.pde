@@ -1,16 +1,10 @@
-/*
-    Developer: Byron Farrell
-    Date created: 11/11/2017
-    
-    Description:
-    ...
-*/
 
 import processing.sound.*;
 
 Table table;
 TableRow row;
 
+// declaring objects
 buttonModel loginButton;
 buttonModel shutdown;
 buttonModel hackComputer;
@@ -25,7 +19,19 @@ cpuUsage cpuBar;
 
 systemErrors error;
 
+monitor monitorScreen;
 
+arcAnimation logo;
+
+// sound files
+SoundFile click1;
+SoundFile loading;
+SoundFile hover;
+SoundFile alarm1;
+SoundFile alarm2;
+SoundFile staticSound;
+
+// state of the program
 int state = 0;
 
 // x and y margins
@@ -59,6 +65,7 @@ float controlPanelY;
 float controlPanelW;
 float controlPanelH;
 
+
 int randNum;
 int hackedNum = 0;
 boolean hacked = false;
@@ -69,17 +76,7 @@ boolean playStatic = false;
 boolean playAlarm2 = true;
 boolean changeBackground = true;
 
-monitor monitorScreen;
 
-arcAnimation logo;
-
-// sound files
-SoundFile click1;
-SoundFile loading;
-SoundFile hover;
-SoundFile alarm1;
-SoundFile alarm2;
-SoundFile staticSound;
 
 void setup()
 {
@@ -189,7 +186,6 @@ void draw()
       }
       break;
   } 
-  logo.hourglass();
   checkHover();
 }
 
@@ -197,10 +193,12 @@ void draw()
 // FUNCTIONS
 void logged_out()
 {
+  // speed at which the charaters will fall down
   if ( frameCount % 4 == 0 )
   {
     fallingCode.drawMatrixCode();
   }
+  // buttons
   loginButton.drawButton();
   shutdown.drawButton();
   changeBackground = true;
@@ -210,7 +208,6 @@ void logged_out()
 void logged_in()
 {
   // monitor
-  //background( 20 );
   if ( changeBackground )
   {
     background( 0 );
@@ -246,10 +243,13 @@ void logged_in()
   text( "User: Anonymous", statusPanelX + ( statusPanelW * 0.05 ), statusPanelY + ( statusPanelH * 0.6 ) );
   text( "Number of computers hacked: " + hackedNum, statusPanelX + ( statusPanelW * 0.35 ), statusPanelY + ( statusPanelH * 0.6 ) );
   
+  // if the user clicked hack
   if ( hacked )
   { 
+    // will be true while the loading bar is loading
     if ( loadingBar )
     {
+      // play sound while loading bar is loading
       if ( playSound )
       {
         loading.play();
@@ -294,6 +294,7 @@ void hack( int randNum )
   fill( 66, 244, 72 );
   textSize( monitorTextSize );
   textAlign( LEFT, TOP );
+  // getting data from csv file
   text( "Name: " + row.getString("name"), monitorX + monitorTextSize, monitorY + monitorTextSize);
   text( "Age: " + row.getString("age"), monitorX + monitorTextSize, monitorY + monitorTextSize * 2);
   text( "Location: " + row.getString("location"), monitorX + monitorTextSize, monitorY + monitorTextSize * 3);
@@ -303,10 +304,14 @@ void hack( int randNum )
   
   emailMsg = row.getString("emailMessage");
   charArray1 = emailMsg.toCharArray();
+  // calculating how many characters are in the last line of the email
   lastLine = charArray1.length % 100;
   count = ( charArray1.length - lastLine ) / 100;
+  // last line will be store in this char array
+  // it will stop random character being printed or any unwanted text
   char[] charArray3 = new char[lastLine];
   
+  // printing email onto the screen
   for ( int i = 0; i < charArray1.length; i += 100 )
   {
     for ( int j = 0; j < 100 && i + j < charArray1.length; j++ )
@@ -335,9 +340,10 @@ void hack( int randNum )
     count--;
   }
   
+  // if the user hacked mr robot
+  // change state to 3, which will call the corruption method in the error class
   if ( row.getString("name").equals( "Mr Robot" ) )
   {
-    
     textAlign( CENTER, CENTER );
     textSize( width / 30 );
     text( "HELLO FRIEND", width / 2, height / 2 );
@@ -345,6 +351,7 @@ void hack( int randNum )
   }
 }
 
+// checking if the mouse id hovering over the button
 void checkHover()
 {
   if ( loginButton.hover() )
@@ -384,6 +391,7 @@ void checkHover()
   }
 }
 
+// checking if any of the button have been clicked
 void checkButtons()
 {
   if ( loginButton.buttonPressed() )

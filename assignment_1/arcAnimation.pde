@@ -8,7 +8,6 @@ class arcAnimation
   float speed1 = 0;
   float speed2 = 0;
   
-  PShape hourglass;
   PShape triangle1;
   PShape triangle2;
   
@@ -26,9 +25,7 @@ class arcAnimation
     // creating hourglass shape
     triangle1 = createShape( TRIANGLE, x, y, x + ( radius * 0.25 ), y - ( radius * 0.4 ), x - ( radius * 0.25 ), y - ( radius * 0.4 ) );
     triangle2 = createShape( TRIANGLE, x, y, x + ( radius * 0.25 ), y + ( radius * 0.4 ), x - ( radius * 0.25 ), y + ( radius * 0.4 ) );
-    hourglass = createShape( GROUP );
-    hourglass.addChild( triangle1 );
-    hourglass.addChild( triangle2 );
+
     
   }
   
@@ -49,7 +46,9 @@ class arcAnimation
   {
     speed1 += 2;
     speed2 -= 1;
-    
+   
+    // if the ellipse == the arcRaduis decrease its raduis if 
+    // if == the arcRadius / 2 increase its radius
     if ( ellipseRadius == arcRadius )
     {
       toggle = true;
@@ -67,21 +66,5 @@ class arcAnimation
     {
       ellipseRadius += 0.5;
     }
-  }
-  
-  void hourglass()
-  {
-    pushMatrix();
-    noStroke();
-    //translate( x, y );
-    //rectMode( CENTER );
-    //rotate( radians( p ) );
-    //shape( hourglass, 0, 0 );
-    //triangle( 100, 100, 150, 150, 50, 150 );
-    //triangle(x, y, x + ( arcRadius * 0.25 ), y - ( arcRadius * 0.4 ), x - ( arcRadius * 0.25 ), y - ( arcRadius * 0.4 ) );
-    //hourglass.rotate( radians( 0.2 ));
-    popMatrix();
-  }
-  
-  
+  } 
 }

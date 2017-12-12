@@ -7,7 +7,7 @@ class buttonModel extends boxModel
   color strokeC;
   String text;
   float buttonCurve = 7;
-  
+    
   float xTopLeft;
   float yTopLeft;
   
